@@ -67,6 +67,21 @@ public class UserService {
         return "Usuário não encontrado";
     }
 
+    public User updateUser(Long id, User updatedUser) {
+        return userRepository.findById(id).map(user -> {
+            if (updatedUser.getUsername() != null) {
+                user.setUsername(updatedUser.getUsername());
+            }
+            if (updatedUser.getEmail() != null) {
+                user.setEmail(updatedUser.getEmail());
+            }
+            if (updatedUser.getPassword() != null) {
+                user.setPassword(updatedUser.getPassword());
+            }
+            return userRepository.save(user);
+        }).orElseThrow(() -> new RuntimeException("Usuário não encontrado com o ID: " + id));
+    }
+
     public User updateUser(Long id, String newUsername, String newEmail) {
         return userRepository.findById(id).map(user -> {
             user.setUsername(newUsername);

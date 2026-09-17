@@ -3,7 +3,7 @@ package com.example.securityproject2.API.Entity;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "User")
+@Table(name = "users")
 @Inheritance(strategy = InheritanceType.JOINED)
 public class User {
 

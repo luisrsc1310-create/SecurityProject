@@ -48,14 +48,13 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.CREATED).body(createdUser);
     }
 
-    // Endpoint para atualizar os dados de um usuário
+    // Endpoint para atualizar os dados de um usuário via JSON (@RequestBody)
     @PutMapping("/{id}")
     public ResponseEntity<User> updateUser(
             @PathVariable Long id,
-            @RequestParam String username,
-            @RequestParam String email) {
+            @RequestBody User user) {
         try {
-            User updatedUser = userService.updateUser(id, username, email);
+            User updatedUser = userService.updateUser(id, user);
             return ResponseEntity.ok(updatedUser);
         } catch (RuntimeException e) {
             return ResponseEntity.notFound().build();
